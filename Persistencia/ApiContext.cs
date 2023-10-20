@@ -28,7 +28,7 @@ public class ApiContext : DbContext
     public DbSet<Inventario> Inventarios { get; set; }
     public DbSet<InventarioTalla> InventarioTallas { get; set; }
     public DbSet<Municipio> Municipios { get; set; }
-    public DbSet<Orden> Ordens { get; set; }
+    public DbSet<Orden> Ordenes { get; set; }
     public DbSet<Pais> Paises { get; set; }
     public DbSet<Prenda> Prendas { get; set; }
     public DbSet<Proveedor> Proveedores { get; set; }

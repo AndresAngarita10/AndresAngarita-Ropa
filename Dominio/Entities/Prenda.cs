@@ -3,7 +3,7 @@ namespace Dominio.Entities;
 
 public class Prenda : BaseEntity
 {
-    public string IdentificacionPrenda { get; set; }
+    public string IdentificacionPrenda { get; set; } //unico
     public string Nombre { get; set; }
     public double ValorUnitatioCop { get; set; }
     public double ValorUnitarioUsd { get; set; }

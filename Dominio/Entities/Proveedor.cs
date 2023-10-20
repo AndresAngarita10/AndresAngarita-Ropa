@@ -3,7 +3,7 @@ namespace Dominio.Entities;
 
 public class Proveedor : BaseEntity
 {
-    public string NitProveedor { get; set; }
+    public string NitProveedor { get; set; } // unico
     public string Nombre { get; set; }
     public int IdTipoPersona { get; set; }
     public TipoPersona TipoPersona { get; set; }

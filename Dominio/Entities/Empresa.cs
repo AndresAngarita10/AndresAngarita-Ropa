@@ -3,7 +3,7 @@ namespace Dominio.Entities;
 
 public class Empresa : BaseEntity
 {
-    public string NitEmpresa { get; set; }
+    public string NitEmpresa { get; set; } // unico
     public string RazonSocial { get; set; }
     public string RepresentanteLegal { get; set; }
     public DateOnly FechaCreacion { get; set; }
