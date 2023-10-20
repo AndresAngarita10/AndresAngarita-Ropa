@@ -1,4 +1,3 @@
-
 using Dominio.Entities;
 using Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -6,29 +5,29 @@ using Persistencia;
 
 namespace Aplicacion.Repository;
 
-public class ClienteRepository : GenericRepo<Cliente>, ICliente
+public class MunicipioRepository : GenericRepo<Municipio>, IMunicipio
 {
     private readonly ApiContext _context;
 
-    public ClienteRepository(ApiContext context) : base(context)
+    public MunicipioRepository(ApiContext context) : base(context)
     {
         _context = context;
     }
 
-    public override async Task<IEnumerable<Cliente>> GetAllAsync()
+    public override async Task<IEnumerable<Municipio>> GetAllAsync()
     {
-        return await _context.Clientes
+        return await _context.Municipios
             .ToListAsync();
     }
 
-    public override async Task<Cliente> GetByIdAsync(int id)
+    public override async Task<Municipio> GetByIdAsync(int id)
     {
-        return await _context.Clientes
+        return await _context.Municipios
         .FirstOrDefaultAsync(p => p.Id == id);
     }
-    public override async Task<(int totalRegistros, IEnumerable<Cliente> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
+    public override async Task<(int totalRegistros, IEnumerable<Municipio> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
-        var query = _context.Clientes as IQueryable<Cliente>;
+        var query = _context.Municipios as IQueryable<Municipio>;
 
         if (!string.IsNullOrEmpty(search))
         {

@@ -1,4 +1,3 @@
-
 using Dominio.Entities;
 using Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -6,33 +5,33 @@ using Persistencia;
 
 namespace Aplicacion.Repository;
 
-public class ClienteRepository : GenericRepo<Cliente>, ICliente
+public class OrdenRepository : GenericRepo<Orden>, IOrden
 {
     private readonly ApiContext _context;
 
-    public ClienteRepository(ApiContext context) : base(context)
+    public OrdenRepository (ApiContext context) : base(context)
     {
         _context = context;
     }
-
-    public override async Task<IEnumerable<Cliente>> GetAllAsync()
+    
+    public override async Task<IEnumerable<Orden>> GetAllAsync()
     {
-        return await _context.Clientes
+        return await _context.Ordenes
             .ToListAsync();
     }
 
-    public override async Task<Cliente> GetByIdAsync(int id)
+    public override async Task<Orden> GetByIdAsync(int id)
     {
-        return await _context.Clientes
+        return await _context.Ordenes
         .FirstOrDefaultAsync(p => p.Id == id);
     }
-    public override async Task<(int totalRegistros, IEnumerable<Cliente> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
+    public override async Task<(int totalRegistros, IEnumerable<Orden> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
-        var query = _context.Clientes as IQueryable<Cliente>;
+        var query = _context.Ordenes as IQueryable<Orden>;
 
         if (!string.IsNullOrEmpty(search))
         {
-            query = query.Where(p => p.Nombre.ToLower().Contains(search));
+            query = query.Where(p => p.Id.ToString().ToLower().Contains(search));
         }
 
         query = query.OrderBy(p => p.Id);

@@ -1,34 +1,32 @@
-
 using Dominio.Entities;
 using Dominio.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistencia;
-
 namespace Aplicacion.Repository;
 
-public class ClienteRepository : GenericRepo<Cliente>, ICliente
+public class PrendaRepository : GenericRepo<Prenda>, IPrenda
 {
     private readonly ApiContext _context;
 
-    public ClienteRepository(ApiContext context) : base(context)
+    public PrendaRepository(ApiContext context) : base(context)
     {
         _context = context;
     }
 
-    public override async Task<IEnumerable<Cliente>> GetAllAsync()
+    public override async Task<IEnumerable<Prenda>> GetAllAsync()
     {
-        return await _context.Clientes
+        return await _context.Prendas
             .ToListAsync();
     }
 
-    public override async Task<Cliente> GetByIdAsync(int id)
+    public override async Task<Prenda> GetByIdAsync(int id)
     {
-        return await _context.Clientes
+        return await _context.Prendas
         .FirstOrDefaultAsync(p => p.Id == id);
     }
-    public override async Task<(int totalRegistros, IEnumerable<Cliente> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
+    public override async Task<(int totalRegistros, IEnumerable<Prenda> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
-        var query = _context.Clientes as IQueryable<Cliente>;
+        var query = _context.Prendas as IQueryable<Prenda>;
 
         if (!string.IsNullOrEmpty(search))
         {
