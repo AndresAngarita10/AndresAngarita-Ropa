@@ -43,4 +43,21 @@ public class InsumoProveedorRepository : GenericRepo<InsumoProveedor>, IInsumoPr
 
         return (totalRegistros, registros);
     }
+
+
+    public async Task<IEnumerable<object>> InsumosPorProveedor(string nit)
+    {
+        return await (
+            from insup in _context.InsumoProveedores
+            join prov in _context.Proveedores on insup.IdProveedor equals prov.Id
+            join insu in _context.Insumos on insup.IdInsumo equals insu.Id
+            where prov.NitProveedor.Equals(nit)
+            select new
+            {
+                Id = insu.Id,
+                Nombre = insu.Nombre,
+                ValorUnitario = insu.ValorUnitario
+            }
+        ).ToListAsync();
+    }
 }

@@ -43,4 +43,37 @@ public class InsumoPrendaRepository : GenericRepo<InsumoPrenda>, IInsumoPrenda
 
         return (totalRegistros, registros);
     }
+
+    
+    public async Task<IEnumerable<object>> InsumosYCostoProduccion(string id)
+    {
+        return await (
+            from insup in _context.InsumoPrendas
+            join prenda in _context.Prendas on insup.IdPrenda equals prenda.Id
+            join insu in _context.Insumos on insup.IdInsumo equals insu.Id
+            where prenda.IdentificacionPrenda.Equals(id)
+            select new
+            {
+                Prenda = prenda.Nombre,
+                insumos = (
+                    from i in _context.Insumos
+                    where i.Id == insup.IdInsumo
+                    select new 
+                    {
+                        Nombre = i.Nombre,
+                        costo = i.ValorUnitario,
+                        cantidad = insup.Cantidad
+                    }
+                ).ToList(),
+                costototal = (
+                    from i in _context.Insumos
+                    where i.Id == insup.IdInsumo
+                    select new 
+                    {
+                        Total = i.ValorUnitario*insup.Cantidad
+                    }
+                ).Sum(x => x.Total)
+            }
+        ).ToListAsync();
+    }
 }

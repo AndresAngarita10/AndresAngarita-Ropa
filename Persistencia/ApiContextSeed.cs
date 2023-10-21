@@ -12,22 +12,6 @@ public class ApiContextSeed
     {
         try
         {
-            //inicio de las insersiones en la db
-            /* var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); */
-
-           /*  if (!context.Usuarios.Any())
-            {
-                using (var reader = new StreamReader(ruta + @"/Data/Csv/User.csv"))
-                {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Usuario>();
-                        context.Usuarios.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-                
-            } */
             
             if (!context.Usuarios.Any())
             {
@@ -42,33 +26,6 @@ public class ApiContextSeed
                     }
                 }
             }
-/* 
-            if (!context.RolUsuarios.Any())
-            {
-                using (var reader = new StreamReader(ruta + @"\Data\Csv\RoleUser.csv"))
-                {
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<RolUsuario>();
-                        List<RolUsuario> entidad = new List<RolUsuario>();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new RolUsuario
-                            {
-                                IdUsuarioFk = item.IdUsuarioFk,
-                                IdRolFk = item.IdRolFk
-                            });
-                        }
-                        context.RolUsuarios.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } */
             
             if (!context.Roles.Any())
             {
@@ -111,37 +68,6 @@ public class ApiContextSeed
                 }
             }
 
-            /* if (!context.Quotes.Any())
-            {
-                using (var readerQuote = new StreamReader("../Persistence/Data/Csvs/Quote.csv"))
-                {
-                    using (var csv = new CsvReader(readerQuote, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        var list = csv.GetRecords<Quote>();
-
-                        List<Quote> entidad = new List<Quote>();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new Quote
-                            {
-                                Id = item.Id,
-                                Date = item.Date,
-                                Hour = item.Hour,
-                                Reason = item.Reason,
-                                PetIdFk = item.PetIdFk,
-                                VeterinarianIdFk = item.VeterinarianIdFk,
-                            });
-                        }
-
-                        context.Quotes.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } */
         //fin de las insersiones en la db
         }
         catch (Exception ex)

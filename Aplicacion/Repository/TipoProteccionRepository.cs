@@ -43,4 +43,25 @@ public class TipoProteccionRepository : GenericRepo<TipoProteccion>, ITipoProtec
 
         return (totalRegistros, registros);
     }
+
+    
+    public async Task<IEnumerable<object>> PrendasPorTipoProteccion()
+    {
+        return await (
+            from o in _context.TipoProtecciones
+            select new
+            {
+                NombreProteccion = o.Descripcion,
+                Prendas = (
+                    from pre in _context.Prendas
+                    where pre.IdTipoProteccion == o.Id
+                    select new
+                    {
+                        Id = pre.Id,
+                        Nombre = pre.Nombre 
+                    }
+                ).ToList()
+            }
+        ).ToListAsync();
+    }
 }

@@ -43,4 +43,52 @@ public class VentaRepository : GenericRepo<Venta>, IVenta
 
         return (totalRegistros, registros);
     }
+    
+    public async Task<IEnumerable<object>> VentaPorEmpleadoEspecifico(string id)
+    {
+        return await (
+            from p in _context.Ventas
+            join emp in _context.Empleados on p.IdEmpleado equals emp.Id
+            where emp.IdentificacionEmpleado.Equals(id)
+            select new
+            {
+                IdEmpleado = emp.Id,
+                Empleado = emp.Nombre,
+                Fecha = p.Fecha,
+                Total = (
+                    from fact in _context.DetalleVentas
+                    where fact.IdVenta == p.Id
+                    select new
+                    {
+                        Total = fact.Cantidad*fact.ValorUnitario,
+                    }
+                ).Sum(x => x.Total)
+            }
+        ).ToListAsync();
+    }
+
+    /* 
+    return await (
+            from p in _context.Partners
+            join pt in _context.PartnerTypes on p.PartnerTypeIdFk equals pt.Id
+            join es in _context.Specialities on p.SpecialtyIdFk equals es.Id
+            where pt.Name.Contains("Cliente")
+            where es.Name.Contains("Cliente")
+            select new
+            {
+                Name = p.Name,
+                Pets = (
+                    from pet in _context.Pets
+                    join esp in _context.Species on pet.SpeciesIdFk equals esp.Id
+                    where pet.UserOwnerId == p.Id
+                    select new
+                    {
+                        Name = pet.Name,
+                        Birth = pet.DateBirth,
+                        Especies = esp.Name
+                    }
+                ).ToList()
+            }
+        ).ToListAsync();
+     */
 }

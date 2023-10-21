@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace API.Dtos;
-public class DataUserDto
+public class DataUserDto 
 {
     public int Id { get; set; }
     public string Message { get; set; }

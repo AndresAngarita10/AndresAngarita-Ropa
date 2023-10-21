@@ -54,21 +54,6 @@ public class UserConfiguration : IEntityTypeConfiguration<Usuario>
             .HasForeignKey(p => p.IdUsuarioFk);
 
 
-            /* builder.HasOne(p => p.TipoEmail)
-            .WithMany(p => p.Emails)
-            .HasForeignKey(p => p.TipoEmailIdFk); */
-
-            /* builder.Property(e => e.Stock)
-            .HasColumnName("stock")
-            .HasColumnType("int")
-            .HasMaxLength(3)
-            .IsRequired(); */
-
-            /* builder.Property(e => e.Descripcion)
-            .HasColumnName("descripcion")
-            .HasColumnType("varchar")
-            .HasMaxLength(256)
-            .IsRequired(); */
         }
 
     }
