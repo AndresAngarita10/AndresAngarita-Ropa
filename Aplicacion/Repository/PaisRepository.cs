@@ -25,6 +25,7 @@ public class PaisRepository : GenericRepo<Pais>, IPais
         return await _context.Paises
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+    
     public override async Task<(int totalRegistros, IEnumerable<Pais> registros)> GetAllAsync(int pageIndez, int pageSize, string search)
     {
         var query = _context.Paises as IQueryable<Pais>;

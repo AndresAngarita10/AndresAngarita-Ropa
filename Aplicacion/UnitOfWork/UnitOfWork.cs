@@ -4,9 +4,16 @@ using Dominio.Interfaces;
 using Persistencia;
 
 namespace Aplicacion.UnitOfWork;
-public class UnitOfWork  : IUnitOfWork, IDisposable
+public class UnitOfWork : IUnitOfWork, IDisposable
 {
+
     private readonly ApiContext _context;
+
+
+    public UnitOfWork(ApiContext context)
+    {
+        _context = context;
+    }
 
     private RolRepository _Rol;
     private CargoRepository _Cargos;
@@ -37,28 +44,26 @@ public class UnitOfWork  : IUnitOfWork, IDisposable
     private TipoProteccionRepository _TipoProtecciones;
     private VentaRepository _Ventas;
 
-    public UnitOfWork(ApiContext context)
-    {
-        _context = context;
-    }
-    
+
     public IRol Roles
     {
-        get{
-            if(_Rol== null)
+        get
+        {
+            if (_Rol == null)
             {
-                _Rol= new RolRepository(_context);
+                _Rol = new RolRepository(_context);
             }
             return _Rol;
         }
     }
-    
+
     public IUsuario Usuarios
     {
-        get{
-            if(_usuarios== null)
+        get
+        {
+            if (_usuarios == null)
             {
-                _usuarios= new UsuarioRepository(_context);
+                _usuarios = new UsuarioRepository(_context);
             }
             return _usuarios;
         }
@@ -66,285 +71,311 @@ public class UnitOfWork  : IUnitOfWork, IDisposable
 
     public ICargo Cargos
     {
-        get{
-            if(_Cargos == null)
+        get
+        {
+            if (_Cargos == null)
             {
                 _Cargos = new CargoRepository(_context);
             }
-            return _Cargos ;
+            return _Cargos;
         }
     }
 
     public ICliente Clientes
     {
-        get{
-            if(_Clientes == null)
+        get
+        {
+            if (_Clientes == null)
             {
                 _Clientes = new ClienteRepository(_context);
             }
-            return _Clientes ;
+            return _Clientes;
         }
     }
 
-    public IColor Colores 
+    public IColor Colores
     {
-        get{
-            if(_Colores == null)
+        get
+        {
+            if (_Colores == null)
             {
                 _Colores = new ColorRepository(_context);
             }
-            return _Colores ;
+            return _Colores;
         }
     }
 
-    public IDepartamento Departamentos 
+    public IDepartamento Departamentos
     {
-        get{
-            if(_Departamentos == null)
+        get
+        {
+            if (_Departamentos == null)
             {
                 _Departamentos = new DepartamentoRepository(_context);
             }
-            return _Departamentos ;
+            return _Departamentos;
         }
     }
 
-    public IDetalleOrden DetalleOrdenes 
+    public IDetalleOrden DetalleOrdenes
     {
-        get{
-            if(_DetalleOrdenes == null)
+        get
+        {
+            if (_DetalleOrdenes == null)
             {
                 _DetalleOrdenes = new DetalleOrdenRepository(_context);
             }
-            return _DetalleOrdenes ;
+            return _DetalleOrdenes;
         }
     }
 
-    public IDetalleVenta DetalleVentas 
+    public IDetalleVenta DetalleVentas
     {
-        get{
-            if(_DetalleVentas == null)
+        get
+        {
+            if (_DetalleVentas == null)
             {
                 _DetalleVentas = new DetalleVentaRepository(_context);
             }
-            return _DetalleVentas ;
+            return _DetalleVentas;
         }
     }
 
-    public IEmpleado Empleados 
+    public IEmpleado Empleados
     {
-        get{
-            if(_Empleados == null)
+        get
+        {
+            if (_Empleados == null)
             {
                 _Empleados = new EmpleadoRepository(_context);
             }
-            return _Empleados ;
+            return _Empleados;
         }
     }
-    public IEmpresa Empresas 
+    public IEmpresa Empresas
     {
-        get{
-            if(_Empresas == null)
+        get
+        {
+            if (_Empresas == null)
             {
                 _Empresas = new EmpresaRepository(_context);
             }
-            return _Empresas ;
+            return _Empresas;
         }
     }
 
-    public IEstado Estados 
+    public IEstado Estados
     {
-        get{
-            if(_Estados == null)
+        get
+        {
+            if (_Estados == null)
             {
                 _Estados = new EstadoRepository(_context);
             }
-            return _Estados ;
+            return _Estados;
         }
     }
 
-    public IFormaPago FormaPagos 
+    public IFormaPago FormaPagos
     {
-        get{
-            if(_FormaPagos == null)
+        get
+        {
+            if (_FormaPagos == null)
             {
                 _FormaPagos = new FormaPagoRepository(_context);
             }
-            return _FormaPagos ;
+            return _FormaPagos;
         }
     }
 
-    public IGenero Generos 
+    public IGenero Generos
     {
-        get{
-            if(_Generos == null)
+        get
+        {
+            if (_Generos == null)
             {
                 _Generos = new GeneroRepository(_context);
             }
-            return _Generos ;
+            return _Generos;
         }
     }
 
-    public IInsumo Insumos 
+    public IInsumo Insumos
     {
-        get{
-            if(_Insumos == null)
+        get
+        {
+            if (_Insumos == null)
             {
                 _Insumos = new InsumoRepository(_context);
             }
-            return _Insumos ;
+            return _Insumos;
         }
     }
 
-    public IInsumoPrenda InsumoPrendas 
+    public IInsumoPrenda InsumoPrendas
     {
-        get{
-            if(_InsumoPrendas == null)
+        get
+        {
+            if (_InsumoPrendas == null)
             {
                 _InsumoPrendas = new InsumoPrendaRepository(_context);
             }
-            return _InsumoPrendas ;
+            return _InsumoPrendas;
         }
     }
 
-    public IInsumoProveedor InsumoProveedores 
+    public IInsumoProveedor InsumoProveedores
     {
-        get{
-            if(_InsumoProveedores == null)
+        get
+        {
+            if (_InsumoProveedores == null)
             {
                 _InsumoProveedores = new InsumoProveedorRepository(_context);
             }
-            return _InsumoProveedores ;
+            return _InsumoProveedores;
         }
     }
 
-    public IInventario Inventarios 
+    public IInventario Inventarios
     {
-        get{
-            if(_Inventarios == null)
+        get
+        {
+            if (_Inventarios == null)
             {
                 _Inventarios = new InventarioRepository(_context);
             }
-            return _Inventarios ;
+            return _Inventarios;
         }
     }
 
-    public IInventarioTalla InventarioTallas 
+    public IInventarioTalla InventarioTallas
     {
-        get{
-            if(_InventarioTallas == null)
+        get
+        {
+            if (_InventarioTallas == null)
             {
                 _InventarioTallas = new InventarioTallaRepository(_context);
             }
-            return _InventarioTallas ;
+            return _InventarioTallas;
         }
     }
 
-    public IMunicipio Municipios 
+    public IMunicipio Municipios
     {
-        get{
-            if(_Municipios == null)
+        get
+        {
+            if (_Municipios == null)
             {
                 _Municipios = new MunicipioRepository(_context);
             }
-            return _Municipios ;
+            return _Municipios;
         }
     }
 
     public IOrden Ordenes
     {
-        get{
-            if(_Ordenes == null)
+        get
+        {
+            if (_Ordenes == null)
             {
                 _Ordenes = new OrdenRepository(_context);
             }
-            return _Ordenes ;
+            return _Ordenes;
         }
     }
 
-    public IPais Paises 
+    public IPais Paises
     {
-        get{
-            if(_Paises == null)
+        get
+        {
+            if (_Paises == null)
             {
                 _Paises = new PaisRepository(_context);
             }
-            return _Paises ;
+            return _Paises;
         }
     }
 
-    public IPrenda Prendas 
+    public IPrenda Prendas
     {
-        get{
-            if(_Prendas == null)
+        get
+        {
+            if (_Prendas == null)
             {
                 _Prendas = new PrendaRepository(_context);
             }
-            return _Prendas ;
+            return _Prendas;
         }
     }
 
-    public IProveedor Proveedores 
+    public IProveedor Proveedores
     {
-        get{
-            if(_Proveedores == null)
+        get
+        {
+            if (_Proveedores == null)
             {
                 _Proveedores = new ProveedorRepository(_context);
             }
-            return _Proveedores ;
+            return _Proveedores;
         }
     }
 
-    public ITalla Tallas 
+    public ITalla Tallas
     {
-        get{
-            if(_Tallas == null)
+        get
+        {
+            if (_Tallas == null)
             {
                 _Tallas = new TallaRepository(_context);
             }
-            return _Tallas ;
+            return _Tallas;
         }
     }
 
-    public ITipoEstado TipoEstados 
+    public ITipoEstado TipoEstados
     {
-        get{
-            if(_TipoEstados == null)
+        get
+        {
+            if (_TipoEstados == null)
             {
                 _TipoEstados = new TipoEstadoRepository(_context);
             }
-            return _TipoEstados ;
+            return _TipoEstados;
         }
     }
 
-    public ITipoPersona TipoPersonas 
+    public ITipoPersona TipoPersonas
     {
-        get{
-            if(_TipoPersonas == null)
+        get
+        {
+            if (_TipoPersonas == null)
             {
                 _TipoPersonas = new TipoPersonaRepository(_context);
             }
-            return _TipoPersonas ;
+            return _TipoPersonas;
         }
     }
-    public ITipoProteccion TipoProtecciones 
+    public ITipoProteccion TipoProtecciones
     {
-        get{
-            if(_TipoProtecciones == null)
+        get
+        {
+            if (_TipoProtecciones == null)
             {
                 _TipoProtecciones = new TipoProteccionRepository(_context);
             }
-            return _TipoProtecciones ;
+            return _TipoProtecciones;
         }
     }
 
-    public IVenta Ventas 
+    public IVenta Ventas
     {
-        get{
-            if(_Ventas == null)
+        get
+        {
+            if (_Ventas == null)
             {
                 _Ventas = new VentaRepository(_context);
             }
-            return _Ventas ;
+            return _Ventas;
         }
     }
 
